@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { QRCodeSVG } from "qrcode.react";
 import { Card, Button, TextField, SelectField } from "../components/ui";
 
 function QrGeneratorPage() {
@@ -64,12 +65,18 @@ function QrGeneratorPage() {
 
         <Card title="Preview" description="This is a mocked QR representation.">
           <div className="flex flex-col items-center justify-center gap-3">
-            <div className="flex h-40 w-40 items-center justify-center rounded-2xl bg-slate-900 text-[10px] text-slate-400">
-              QR PREVIEW
+            <div className="flex h-40 w-40 items-center justify-center rounded-2xl bg-slate-900">
+              <QRCodeSVG
+                value={fakeQrValue}
+                size={160}
+                level="M"
+                includeMargin
+                aria-label="Table QR code preview"
+              />
             </div>
             <p className="text-xs text-center text-slate-500">
-              In a production system this would render the actual QR code
-              graphic for the generated URL.
+              This QR code encodes the generated URL above. Guests can scan it
+              to open the digital menu or feedback form.
             </p>
           </div>
         </Card>
