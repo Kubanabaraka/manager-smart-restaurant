@@ -18,6 +18,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { Star, Users, CalendarDays, TrendingUp } from "lucide-react";
 import { Card, StatTile, Badge } from "../components/ui";
 import { getDailyAccessStats, getWaiterPerformance } from "../api/mock";
 
@@ -88,6 +89,7 @@ function AnalyticsPage() {
                 trend="+8%"
                 trendLabel="vs. yesterday"
                 accent="brand"
+                icon={Users}
               />
               <StatTile
                 label="Weekly Total"
@@ -95,6 +97,7 @@ function AnalyticsPage() {
                 trend="Last 7 days"
                 trendLabel=""
                 accent="blue"
+                icon={CalendarDays}
               />
               <StatTile
                 label="Avg. Daily"
@@ -102,6 +105,7 @@ function AnalyticsPage() {
                 trend="Per day"
                 trendLabel=""
                 accent="green"
+                icon={TrendingUp}
               />
             </div>
 
@@ -246,8 +250,10 @@ function AnalyticsPage() {
                       <p className="text-sm font-medium text-slate-900">
                         {waiter.name}
                       </p>
-                      <p className="text-[11px] text-slate-400">
-                        {waiter.ordersCompleted} orders • ⭐ {waiter.avgRating}
+                      <p className="flex items-center gap-1 text-[11px] text-slate-400">
+                        {waiter.ordersCompleted} orders
+                        <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
+                        {waiter.avgRating}
                       </p>
                     </div>
 

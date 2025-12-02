@@ -22,6 +22,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
+import { DollarSign, ShoppingCart, TrendingUp } from "lucide-react";
 import { Card, Button, StatTile } from "../components/ui";
 import { getReports } from "../api/mock";
 
@@ -109,6 +110,7 @@ function ReportsPage() {
           trend={period === "day" ? "Last 7 days" : `This ${period}`}
           trendLabel=""
           accent="brand"
+          icon={DollarSign}
         />
         <StatTile
           label="Total Orders"
@@ -116,6 +118,7 @@ function ReportsPage() {
           trend={period === "day" ? "Last 7 days" : `This ${period}`}
           trendLabel=""
           accent="blue"
+          icon={ShoppingCart}
         />
         <StatTile
           label="Avg. Daily Revenue"
@@ -123,6 +126,7 @@ function ReportsPage() {
           trend="Per day average"
           trendLabel=""
           accent="green"
+          icon={TrendingUp}
         />
       </section>
 

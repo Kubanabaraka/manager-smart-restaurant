@@ -1,4 +1,5 @@
 import React from "react";
+import { Save, RotateCcw, Building2, Receipt, Shield } from "lucide-react";
 import { Card, TextField, SelectField, Button } from "../components/ui";
 import { restaurantSettings } from "../data/settings.js";
 
@@ -20,7 +21,7 @@ function SettingsPage() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <Card title="General info">
+        <Card title="General info" icon={Building2}>
           <form className="space-y-4">
             <TextField
               label="Restaurant name"
@@ -37,7 +38,7 @@ function SettingsPage() {
           </form>
         </Card>
 
-        <Card title="Fiscal & service settings">
+        <Card title="Fiscal & service settings" icon={Receipt}>
           <form className="space-y-4">
             <SelectField
               label="Currency"
@@ -69,6 +70,7 @@ function SettingsPage() {
       <Card
         title="Session & safety"
         description="High-signal options for live operation."
+        icon={Shield}
       >
         <form className="grid gap-4 sm:grid-cols-2">
           <SelectField
@@ -91,9 +93,11 @@ function SettingsPage() {
 
           <div className="sm:col-span-2 flex justify-end gap-2 pt-2">
             <Button variant="ghost" size="sm" type="button">
+              <RotateCcw className="mr-1.5 h-3.5 w-3.5" />
               Reset changes
             </Button>
             <Button size="sm" type="submit">
+              <Save className="mr-1.5 h-3.5 w-3.5" />
               Save configuration
             </Button>
           </div>

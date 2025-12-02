@@ -10,15 +10,15 @@ import {
   ImageUpload,
   useToast,
 } from "../components/ui";
-import { waiters } from "../data/waiters.js";
+import { kitchenStaff } from "../data/kitchen.js";
 
-function WaiterFormPage({ mode }) {
+function KitchenStaffFormPage({ mode }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = mode === "edit";
-  const waiter = isEdit ? waiters.find((w) => w.id === id) : null;
+  const staff = isEdit ? kitchenStaff.find((k) => k.id === id) : null;
   const { showToast } = useToast();
-  const [imageData, setImageData] = useState(waiter?.image || null);
+  const [imageData, setImageData] = useState(staff?.image || null);
 
   const handleImageChange = (dataUrl) => {
     setImageData(dataUrl);
@@ -39,15 +39,17 @@ function WaiterFormPage({ mode }) {
             Team
           </p>
           <h1 className="mt-1 text-2xl font-semibold tracking-tight text-slate-900">
-            {isEdit ? "Edit waiter account" : "Add waiter account"}
+            {isEdit
+              ? "Edit kitchen staff account"
+              : "Add kitchen staff account"}
           </h1>
           <p className="mt-1 text-xs text-slate-500">
             Basic profile details and a secure 4-digit PIN.
           </p>
         </div>
-        {isEdit && waiter && (
-          <Badge color={waiter.status === "active" ? "green" : "red"}>
-            {waiter.status === "active" ? "On shift" : "Off shift"}
+        {isEdit && staff && (
+          <Badge color={staff.status === "active" ? "green" : "red"}>
+            {staff.status === "active" ? "On shift" : "Off shift"}
           </Badge>
         )}
       </div>
@@ -59,8 +61,8 @@ function WaiterFormPage({ mode }) {
             e.preventDefault();
             showToast(
               isEdit
-                ? "Waiter account updated for this session only."
-                : "Waiter account created (mock only).",
+                ? "Kitchen staff account updated for this session only."
+                : "Kitchen staff account created (mock only).",
               { type: "success" }
             );
             navigate("/staff");
@@ -69,7 +71,7 @@ function WaiterFormPage({ mode }) {
           <div className="sm:col-span-2">
             <ImageUpload
               label="Profile Photo"
-              hint="Upload a photo of the waiter for easy identification."
+              hint="Upload a photo of the staff member for easy identification."
               value={imageData}
               onChange={handleImageChange}
             />
@@ -77,38 +79,55 @@ function WaiterFormPage({ mode }) {
 
           <TextField
             label="Full name"
-            placeholder="E.g. Emma Wilson"
-            defaultValue={waiter?.name}
+            placeholder="E.g. Marcus Chen"
+            defaultValue={staff?.name}
+            required
           />
           <TextField
             label="Email"
             type="email"
-            placeholder="E.g. emma@example.com"
-            defaultValue={waiter?.email}
+            placeholder="E.g. marcus@example.com"
+            defaultValue={staff?.email}
+            required
           />
 
           <TextField
             label="4-digit PIN"
-            type="number"
+            type="text"
+            inputMode="numeric"
+            pattern="[0-9]{4}"
+            maxLength={4}
             placeholder="E.g. 1234"
-            defaultValue={waiter?.pin}
-            hint="Used by the waiter to log in on their terminal."
+            defaultValue={staff?.pin}
+            hint="Used by staff to log in on kitchen display systems."
+            required
           />
           <SelectField
+            label="Role"
+            defaultValue={staff?.role || "Line Cook"}
+            options={[
+              { value: "Head Chef", label: "Head Chef" },
+              { value: "Sous Chef", label: "Sous Chef" },
+              { value: "Line Cook", label: "Line Cook" },
+              { value: "Prep Cook", label: "Prep Cook" },
+              { value: "Pastry Chef", label: "Pastry Chef" },
+              { value: "Dishwasher", label: "Dishwasher" },
+            ]}
+          />
+
+          <SelectField
             label="Status"
-            defaultValue={waiter?.status || "active"}
+            defaultValue={staff?.status || "active"}
             options={[
               { value: "active", label: "Active – can log in" },
               { value: "inactive", label: "Inactive – access disabled" },
             ]}
           />
 
-          <div className="sm:col-span-2">
-            <TextField
-              label="Notes (optional)"
-              placeholder="Shift preferences, languages spoken, etc."
-            />
-          </div>
+          <TextField
+            label="Notes (optional)"
+            placeholder="Specializations, shift preferences, etc."
+          />
 
           <div className="sm:col-span-2 flex justify-end gap-2 pt-2">
             <Button
@@ -131,4 +150,4 @@ function WaiterFormPage({ mode }) {
   );
 }
 
-export default WaiterFormPage;
+export default KitchenStaffFormPage;

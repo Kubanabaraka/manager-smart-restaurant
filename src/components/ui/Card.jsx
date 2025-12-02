@@ -1,6 +1,6 @@
 import React from "react";
 
-function Card({ title, description, children, className = "" }) {
+function Card({ title, description, children, className = "", icon: Icon }) {
   return (
     <section
       className={[
@@ -10,15 +10,22 @@ function Card({ title, description, children, className = "" }) {
     >
       {(title || description) && (
         <header className="mb-4 flex items-center justify-between gap-3">
-          <div>
-            {title && (
-              <h2 className="text-sm font-semibold tracking-tight text-slate-900 sm:text-base">
-                {title}
-              </h2>
+          <div className="flex items-center gap-3">
+            {Icon && (
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-500/10">
+                <Icon className="h-4 w-4 text-brand-600" />
+              </div>
             )}
-            {description && (
-              <p className="mt-0.5 text-xs text-slate-500">{description}</p>
-            )}
+            <div>
+              {title && (
+                <h2 className="text-sm font-semibold tracking-tight text-slate-900 sm:text-base">
+                  {title}
+                </h2>
+              )}
+              {description && (
+                <p className="mt-0.5 text-xs text-slate-500">{description}</p>
+              )}
+            </div>
           </div>
         </header>
       )}

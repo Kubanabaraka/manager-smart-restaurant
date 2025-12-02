@@ -1,37 +1,34 @@
 import React from "react";
+import { Search, Bell, ChevronDown } from "lucide-react";
 
 function Topbar() {
   return (
-    <header className="sticky top-0 z-20 flex items-center justify-between gap-3 border-b border-slate-200/80 bg-white/80 px-4 py-3 backdrop-blur">
-      <div className="flex items-center gap-3 flex-1">
-        <div className="relative w-full max-w-xs">
-          <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-xs text-slate-400">
-            🔍
-          </span>
+    <header className="sticky top-0 z-20 flex h-16 w-full items-center justify-between border-b border-slate-200/80 bg-white/95 px-4 sm:px-6 lg:px-8 backdrop-blur-sm">
+      {/* Search Bar */}
+      <div className="flex items-center gap-4 flex-1">
+        <div className="relative w-full max-w-md">
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <input
             type="text"
             placeholder="Search orders, menu, waiters..."
-            className="h-9 w-full rounded-full border border-slate-200 bg-slate-50 pl-9 pr-3 text-xs text-slate-700 placeholder:text-slate-400 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/10"
+            className="h-10 w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-4 text-sm text-slate-700 placeholder:text-slate-400 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-colors"
           />
         </div>
       </div>
 
+      {/* Right side actions */}
       <div className="flex items-center gap-3">
+        {/* Notifications */}
+
+        {/* User Profile */}
         <button
           type="button"
-          className="relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 shadow-sm hover:text-slate-800"
+          className="hidden sm:flex items-center gap-3 rounded-xl border border-slate-200 bg-white pl-1.5 pr-3 py-1.5 shadow-sm transition-colors hover:bg-slate-50"
         >
-          <span className="text-xs">🔔</span>
-          <span className="absolute -right-0.5 -top-0.5 inline-flex h-4 min-w-[1rem] items-center justify-center rounded-full bg-brand-500 px-1 text-[10px] font-semibold text-white">
-            3
-          </span>
-        </button>
-
-        <div className="hidden sm:flex items-center gap-2 rounded-full border border-slate-200 bg-white px-2 py-1 shadow-sm">
-          <div className="h-7 w-7 rounded-full bg-gradient-to-tr from-brand-500 to-brand-600 text-[11px] font-semibold text-white flex items-center justify-center">
+          <div className="h-8 w-8 rounded-lg bg-gradient-to-tr from-brand-500 to-brand-600 text-xs font-semibold text-white flex items-center justify-center">
             OM
           </div>
-          <div className="mr-1">
+          <div className="text-left">
             <p className="text-xs font-semibold text-slate-800 leading-tight">
               Olivia Martinez
             </p>
@@ -39,13 +36,8 @@ function Topbar() {
               Shift Manager
             </p>
           </div>
-          <button
-            type="button"
-            className="inline-flex h-7 w-7 items-center justify-center rounded-full text-slate-400 hover:text-brand-500"
-          >
-            <span className="text-xs">⎋</span>
-          </button>
-        </div>
+          <ChevronDown className="h-3.5 w-3.5 text-slate-400" />
+        </button>
       </div>
     </header>
   );
