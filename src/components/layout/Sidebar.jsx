@@ -45,6 +45,18 @@ function Sidebar() {
           <Icon>👥</Icon>
           <span>Waiter Accounts</span>
         </NavLink>
+        <NavLink to="/orders" className={navItemClasses}>
+          <Icon>🍽️</Icon>
+          <span>Orders</span>
+        </NavLink>
+        <NavLink to="/analytics" className={navItemClasses}>
+          <Icon>📊</Icon>
+          <span>Analytics</span>
+        </NavLink>
+        <NavLink to="/reports" className={navItemClasses}>
+          <Icon>📈</Icon>
+          <span>Reports</span>
+        </NavLink>
         <NavLink to="/qr" className={navItemClasses}>
           <Icon>QR</Icon>
           <span>QR Generator</span>

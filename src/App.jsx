@@ -7,6 +7,9 @@ import MenuListPage from "./pages/MenuListPage.jsx";
 import MenuItemFormPage from "./pages/MenuItemFormPage.jsx";
 import WaiterListPage from "./pages/WaiterListPage.jsx";
 import WaiterFormPage from "./pages/WaiterFormPage.jsx";
+import OrdersPage from "./pages/OrdersPage.jsx";
+import AnalyticsPage from "./pages/AnalyticsPage.jsx";
+import ReportsPage from "./pages/ReportsPage.jsx";
 import QrGeneratorPage from "./pages/QrGeneratorPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
 
@@ -41,6 +44,9 @@ function App() {
             element={<WaiterFormPage mode="create" />}
           />
           <Route path="/waiters/:id" element={<WaiterFormPage mode="edit" />} />
+          <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/analytics" element={<AnalyticsPage />} />
+          <Route path="/reports" element={<ReportsPage />} />
           <Route path="/qr" element={<QrGeneratorPage />} />
           <Route path="/settings" element={<SettingsPage />} />
         </Routes>

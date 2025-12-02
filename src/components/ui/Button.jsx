@@ -1,6 +1,7 @@
 import React from "react";
 
 function Button({
+  as: Component = "button",
   variant = "primary",
   size = "md",
   className = "",
@@ -25,12 +26,12 @@ function Button({
   };
 
   return (
-    <button
+    <Component
       className={[base, variants[variant], sizes[size], className].join(" ")}
       {...props}
     >
       {children}
-    </button>
+    </Component>
   );
 }
 

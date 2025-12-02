@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 import { Button, Card, StatTile, Table, Badge } from "../components/ui";
 import { todayOrders, topItems } from "../data/orders.js";
 import { menuItems } from "../data/menu.js";
+import { getDailyAccessStats } from "../api/mock.js";
 
 function DashboardPage() {
+  const [accessData, setAccessData] = useState(null);
+
+  useEffect(() => {
+    getDailyAccessStats().then((data) => setAccessData(data));
+  }, []);
+
   const totalRevenue = todayOrders.reduce((sum, o) => sum + o.value, 0);
   const openOrders = todayOrders.filter((o) => o.status !== "served").length;
 
@@ -139,6 +155,44 @@ function DashboardPage() {
           </ul>
         </Card>
       </div>
+
+      {/* Daily User Access Tracking Chart */}
+      {accessData && (
+        <Card
+          title="Daily User Access"
+          description="Users accessing the system over the last 7 days."
+        >
+          <div className="h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={accessData.weeklyData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis
+                  dataKey="date"
+                  tick={{ fontSize: 11, fill: "#64748b" }}
+                />
+                <YAxis tick={{ fontSize: 11, fill: "#64748b" }} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#fff",
+                    border: "1px solid #e2e8f0",
+                    borderRadius: "12px",
+                    fontSize: "12px",
+                  }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="users"
+                  stroke="#f97316"
+                  strokeWidth={2}
+                  dot={{ fill: "#f97316", strokeWidth: 2 }}
+                  activeDot={{ r: 6 }}
+                  name="Users"
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </Card>
+      )}
 
       <Card
         title="Quick Actions"

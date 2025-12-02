@@ -13,13 +13,12 @@ function WaiterListPage() {
       key: "name",
       header: "Waiter",
       render: (row) => (
-        <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-500/10 text-[11px] font-semibold text-brand-600">
-            {row.name
-              .split(" ")
-              .map((n) => n[0])
-              .join("")}
-          </div>
+        <div className="flex items-center gap-3">
+          <img
+            src={row.image}
+            alt={row.name}
+            className="h-10 w-10 rounded-full object-cover"
+          />
           <div>
             <p className="text-xs font-medium text-slate-900">{row.name}</p>
             <p className="text-[11px] text-slate-400">{row.email}</p>

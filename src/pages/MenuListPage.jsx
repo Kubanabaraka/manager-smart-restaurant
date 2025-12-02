@@ -9,7 +9,20 @@ function MenuListPage() {
   const { showToast } = useToast();
 
   const columns = [
-    { key: "name", header: "Item" },
+    {
+      key: "name",
+      header: "Item",
+      render: (row) => (
+        <div className="flex items-center gap-3">
+          <img
+            src={row.image}
+            alt={row.name}
+            className="h-10 w-10 rounded-lg object-cover"
+          />
+          <span className="text-sm font-medium text-slate-900">{row.name}</span>
+        </div>
+      ),
+    },
     { key: "category", header: "Category" },
     {
       key: "price",
