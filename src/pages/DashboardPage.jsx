@@ -8,13 +8,36 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { Button, Card, StatTile, Table, Badge } from "../components/ui";
+import {
+  Download,
+  PlusCircle,
+  PauseCircle,
+  Clock,
+  Megaphone,
+  Bell,
+  DollarSign,
+  ShoppingCart,
+  Receipt,
+  UtensilsCrossed,
+} from "lucide-react";
+import {
+  Button,
+  Card,
+  StatTile,
+  Table,
+  Badge,
+  Modal,
+  useToast,
+} from "../components/ui";
 import { todayOrders, topItems } from "../data/orders.js";
 import { menuItems } from "../data/menu.js";
 import { getDailyAccessStats } from "../api/mock.js";
+import { exportToCSV, generateShiftReport } from "../utils/helpers.js";
 
 function DashboardPage() {
   const [accessData, setAccessData] = useState(null);
+  const [showNewTableModal, setShowNewTableModal] = useState(false);
+  const { showToast } = useToast();
 
   useEffect(() => {
     getDailyAccessStats().then((data) => setAccessData(data));
@@ -22,6 +45,24 @@ function DashboardPage() {
 
   const totalRevenue = todayOrders.reduce((sum, o) => sum + o.value, 0);
   const openOrders = todayOrders.filter((o) => o.status !== "served").length;
+
+  const handleExportReport = () => {
+    const reportData = generateShiftReport(todayOrders, topItems, totalRevenue);
+    exportToCSV(
+      reportData,
+      `shift-report-${new Date().toISOString().split("T")[0]}.csv`
+    );
+    showToast("Shift report exported successfully!", { type: "success" });
+  };
+
+  const handleOpenNewTable = () => {
+    setShowNewTableModal(true);
+  };
+
+  const handleCreateTable = () => {
+    setShowNewTableModal(false);
+    showToast("New table created successfully!", { type: "success" });
+  };
 
   const ordersColumns = [
     { key: "id", header: "Order ID" },
@@ -79,10 +120,14 @@ function DashboardPage() {
           </p>
         </div>
         <div className="flex gap-2">
-          <Button variant="ghost" size="sm">
+          <Button variant="ghost" size="sm" onClick={handleExportReport}>
+            <Download className="mr-1.5 h-3.5 w-3.5" />
             Export shift report
           </Button>
-          <Button size="sm">Open new table</Button>
+          <Button size="sm" onClick={handleOpenNewTable}>
+            <PlusCircle className="mr-1.5 h-3.5 w-3.5" />
+            Open new table
+          </Button>
         </div>
       </div>
 
@@ -93,6 +138,7 @@ function DashboardPage() {
           trend="+12%"
           trendLabel="vs. yesterday"
           accent="brand"
+          icon={DollarSign}
         />
         <StatTile
           label="Open Orders"
@@ -100,6 +146,7 @@ function DashboardPage() {
           trend="3 tables"
           trendLabel="waiting for kitchen"
           accent="blue"
+          icon={ShoppingCart}
         />
         <StatTile
           label="Avg. Ticket"
@@ -107,6 +154,7 @@ function DashboardPage() {
           trend="+1.3"
           trendLabel="per guest"
           accent="green"
+          icon={Receipt}
         />
         <StatTile
           label="Menu Items Online"
@@ -114,6 +162,7 @@ function DashboardPage() {
           trend={`${menuItems.length} total`}
           trendLabel="items configured"
           accent="red"
+          icon={UtensilsCrossed}
         />
       </section>
 
@@ -200,19 +249,60 @@ function DashboardPage() {
       >
         <div className="flex flex-wrap gap-2 text-xs">
           <Button variant="ghost" size="sm">
+            <PauseCircle className="mr-1.5 h-3.5 w-3.5" />
             Pause online orders
           </Button>
           <Button variant="ghost" size="sm">
+            <Clock className="mr-1.5 h-3.5 w-3.5" />
             Mark kitchen as delayed
           </Button>
           <Button variant="ghost" size="sm">
+            <Megaphone className="mr-1.5 h-3.5 w-3.5" />
             Push &quot;Today&apos;s Special&quot; banner
           </Button>
           <Button variant="ghost" size="sm">
+            <Bell className="mr-1.5 h-3.5 w-3.5" />
             Notify all waiters
           </Button>
         </div>
       </Card>
+
+      {/* New Table Modal */}
+      <Modal
+        open={showNewTableModal}
+        onClose={() => setShowNewTableModal(false)}
+        title="Open New Table"
+        description="Create a new table for incoming guests."
+        primaryAction={
+          <Button size="sm" onClick={handleCreateTable}>
+            Create Table
+          </Button>
+        }
+      >
+        <div className="space-y-3">
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-slate-700">
+              Table Number
+            </label>
+            <input
+              type="text"
+              placeholder="e.g., T15"
+              className="h-10 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 text-sm text-slate-700 placeholder:text-slate-400 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20"
+            />
+          </div>
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-slate-700">
+              Number of Guests
+            </label>
+            <input
+              type="number"
+              placeholder="e.g., 4"
+              min="1"
+              className="h-10 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 text-sm text-slate-700 placeholder:text-slate-400 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20"
+            />
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

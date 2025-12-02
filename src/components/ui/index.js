@@ -6,4 +6,5 @@ export { default as Table } from "./Table.jsx";
 export { default as Modal } from "./Modal.jsx";
 export { default as TextField } from "./TextField.jsx";
 export { default as SelectField } from "./SelectField.jsx";
+export { default as ImageUpload } from "./ImageUpload.jsx";
 export { ToastProvider, useToast } from "./ToastContext.jsx";

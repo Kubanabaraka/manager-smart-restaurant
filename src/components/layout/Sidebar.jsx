@@ -1,13 +1,19 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-const Icon = ({ children }) => (
-  <span className="inline-flex h-4 w-4 items-center justify-center rounded-[6px] bg-slate-800/80 text-[10px] font-semibold text-orange-400">
-    {children}
-  </span>
-);
+import {
+  LayoutDashboard,
+  UtensilsCrossed,
+  Users,
+  ClipboardList,
+  BarChart3,
+  FileText,
+  QrCode,
+  Settings,
+  ChefHat,
+} from "lucide-react";
 
 const navItemBase =
-  "flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors";
+  "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors";
 
 const navItemClasses = ({ isActive }) =>
   [
@@ -19,10 +25,10 @@ const navItemClasses = ({ isActive }) =>
 
 function Sidebar() {
   return (
-    <aside className="hidden md:flex md:flex-col w-64 bg-slate-950 text-slate-100 border-r border-slate-800">
-      <div className="flex items-center gap-2 px-6 py-5 border-b border-slate-800">
-        <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-brand-500 to-brand-600 flex items-center justify-center text-white font-bold text-lg">
-          MS
+    <aside className="hidden md:flex md:flex-col w-64 bg-slate-950 text-slate-100 border-r border-slate-800 flex-shrink-0">
+      <div className="flex items-center gap-3 px-5 py-5 border-b border-slate-800">
+        <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-brand-500 to-brand-600 flex items-center justify-center text-white">
+          <ChefHat className="h-5 w-5" />
         </div>
         <div>
           <p className="text-sm font-semibold tracking-tight">Manager Smart</p>
@@ -32,37 +38,37 @@ function Sidebar() {
         </div>
       </div>
 
-      <nav className="flex-1 px-4 py-4 space-y-1 text-sm">
+      <nav className="flex-1 px-3 py-4 space-y-1 text-sm">
         <NavLink to="/dashboard" className={navItemClasses}>
-          <Icon>🏠</Icon>
+          <LayoutDashboard className="h-4 w-4" />
           <span>Dashboard</span>
         </NavLink>
         <NavLink to="/menu" className={navItemClasses}>
-          <Icon>📋</Icon>
+          <UtensilsCrossed className="h-4 w-4" />
           <span>Menu</span>
         </NavLink>
-        <NavLink to="/waiters" className={navItemClasses}>
-          <Icon>👥</Icon>
-          <span>Waiter Accounts</span>
+        <NavLink to="/staff" className={navItemClasses}>
+          <Users className="h-4 w-4" />
+          <span>Staff</span>
         </NavLink>
         <NavLink to="/orders" className={navItemClasses}>
-          <Icon>🍽️</Icon>
+          <ClipboardList className="h-4 w-4" />
           <span>Orders</span>
         </NavLink>
         <NavLink to="/analytics" className={navItemClasses}>
-          <Icon>📊</Icon>
+          <BarChart3 className="h-4 w-4" />
           <span>Analytics</span>
         </NavLink>
         <NavLink to="/reports" className={navItemClasses}>
-          <Icon>📈</Icon>
+          <FileText className="h-4 w-4" />
           <span>Reports</span>
         </NavLink>
         <NavLink to="/qr" className={navItemClasses}>
-          <Icon>QR</Icon>
+          <QrCode className="h-4 w-4" />
           <span>QR Generator</span>
         </NavLink>
         <NavLink to="/settings" className={navItemClasses}>
-          <Icon>⚙️</Icon>
+          <Settings className="h-4 w-4" />
           <span>Settings</span>
         </NavLink>
       </nav>

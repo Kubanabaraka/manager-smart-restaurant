@@ -6,6 +6,7 @@
  */
 
 import React, { useState, useEffect } from "react";
+import { CheckCircle, Clock, Loader2 } from "lucide-react";
 import { Card, Table, Badge } from "../components/ui";
 import { getOrders } from "../api/mock";
 
@@ -160,29 +161,44 @@ function OrdersPage() {
 
       {/* Quick Stats */}
       <div className="grid gap-3 sm:grid-cols-3">
-        <div className="rounded-xl border border-emerald-200 bg-emerald-50/60 p-4">
-          <p className="text-xs font-medium uppercase tracking-wide text-emerald-700">
-            Served Today
-          </p>
-          <p className="mt-1 text-2xl font-semibold text-emerald-800">
-            {ordersData.counts.served}
-          </p>
+        <div className="flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50/60 p-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100">
+            <CheckCircle className="h-5 w-5 text-emerald-600" />
+          </div>
+          <div>
+            <p className="text-xs font-medium uppercase tracking-wide text-emerald-700">
+              Served Today
+            </p>
+            <p className="mt-0.5 text-2xl font-semibold text-emerald-800">
+              {ordersData.counts.served}
+            </p>
+          </div>
         </div>
-        <div className="rounded-xl border border-orange-200 bg-orange-50/60 p-4">
-          <p className="text-xs font-medium uppercase tracking-wide text-orange-700">
-            Pending
-          </p>
-          <p className="mt-1 text-2xl font-semibold text-orange-800">
-            {ordersData.counts.pending}
-          </p>
+        <div className="flex items-center gap-3 rounded-xl border border-orange-200 bg-orange-50/60 p-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-100">
+            <Clock className="h-5 w-5 text-orange-600" />
+          </div>
+          <div>
+            <p className="text-xs font-medium uppercase tracking-wide text-orange-700">
+              Pending
+            </p>
+            <p className="mt-0.5 text-2xl font-semibold text-orange-800">
+              {ordersData.counts.pending}
+            </p>
+          </div>
         </div>
-        <div className="rounded-xl border border-blue-200 bg-blue-50/60 p-4">
-          <p className="text-xs font-medium uppercase tracking-wide text-blue-700">
-            In Progress
-          </p>
-          <p className="mt-1 text-2xl font-semibold text-blue-800">
-            {ordersData.counts.inProgress}
-          </p>
+        <div className="flex items-center gap-3 rounded-xl border border-blue-200 bg-blue-50/60 p-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100">
+            <Loader2 className="h-5 w-5 text-blue-600" />
+          </div>
+          <div>
+            <p className="text-xs font-medium uppercase tracking-wide text-blue-700">
+              In Progress
+            </p>
+            <p className="mt-0.5 text-2xl font-semibold text-blue-800">
+              {ordersData.counts.inProgress}
+            </p>
+          </div>
         </div>
       </div>
     </div>

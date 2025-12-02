@@ -1,11 +1,12 @@
 import React from "react";
+import { X } from "lucide-react";
 import Button from "./Button.jsx";
 
 function Modal({ open, title, description, onClose, children, primaryAction }) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/50 px-4 py-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 px-4 py-8 backdrop-blur-sm">
       <div className="w-full max-w-md rounded-2xl bg-white p-5 shadow-xl">
         <header className="mb-3 flex items-start justify-between gap-3">
           <div>
@@ -18,10 +19,10 @@ function Modal({ open, title, description, onClose, children, primaryAction }) {
           </div>
           <button
             type="button"
-            className="text-xs text-slate-400 hover:text-slate-600"
+            className="flex h-7 w-7 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600"
             onClick={onClose}
           >
-            Esc
+            <X className="h-4 w-4" />
           </button>
         </header>
         <div className="mb-4 text-sm text-slate-700">{children}</div>

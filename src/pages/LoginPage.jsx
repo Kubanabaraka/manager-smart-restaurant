@@ -1,4 +1,5 @@
 import React from "react";
+import { ChefHat, Users, Receipt, UserCheck, LogIn } from "lucide-react";
 import { Button, TextField } from "../components/ui";
 
 function LoginPage() {
@@ -7,10 +8,15 @@ function LoginPage() {
       <div className="mx-auto flex w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/70 shadow-2xl shadow-black/60 md:flex-row">
         <div className="relative flex flex-1 flex-col justify-between bg-gradient-to-br from-brand-500 via-orange-500 to-rose-500 px-8 py-8 text-white">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-white/80">
-              Manager Console
-            </p>
-            <h1 className="mt-3 text-2xl font-semibold tracking-tight md:text-3xl">
+            <div className="flex items-center gap-2">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/20">
+                <ChefHat className="h-5 w-5" />
+              </div>
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-white/80">
+                Manager Console
+              </p>
+            </div>
+            <h1 className="mt-4 text-2xl font-semibold tracking-tight md:text-3xl">
               MANAGER SMART RESTAURANT
             </h1>
             <p className="mt-3 max-w-xs text-sm text-white/80">
@@ -21,23 +27,32 @@ function LoginPage() {
           <div className="mt-6 text-[11px] text-white/80">
             <p className="font-semibold">Shift Insights</p>
             <div className="mt-2 grid grid-cols-3 gap-2 text-[11px]">
-              <div className="rounded-2xl bg-black/15 px-3 py-2">
-                <p className="text-[10px] uppercase tracking-[0.16em] text-white/70">
-                  Live tables
-                </p>
-                <p className="text-lg font-semibold">12</p>
+              <div className="flex items-center gap-2 rounded-2xl bg-black/15 px-3 py-2">
+                <Users className="h-4 w-4 text-white/70" />
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.16em] text-white/70">
+                    Live tables
+                  </p>
+                  <p className="text-lg font-semibold">12</p>
+                </div>
               </div>
-              <div className="rounded-2xl bg-black/15 px-3 py-2">
-                <p className="text-[10px] uppercase tracking-[0.16em] text-white/70">
-                  Avg. ticket
-                </p>
-                <p className="text-lg font-semibold">$28.40</p>
+              <div className="flex items-center gap-2 rounded-2xl bg-black/15 px-3 py-2">
+                <Receipt className="h-4 w-4 text-white/70" />
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.16em] text-white/70">
+                    Avg. ticket
+                  </p>
+                  <p className="text-lg font-semibold">$28.40</p>
+                </div>
               </div>
-              <div className="rounded-2xl bg-black/15 px-3 py-2">
-                <p className="text-[10px] uppercase tracking-[0.16em] text-white/70">
-                  Waiters online
-                </p>
-                <p className="text-lg font-semibold">5</p>
+              <div className="flex items-center gap-2 rounded-2xl bg-black/15 px-3 py-2">
+                <UserCheck className="h-4 w-4 text-white/70" />
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.16em] text-white/70">
+                    Waiters online
+                  </p>
+                  <p className="text-lg font-semibold">5</p>
+                </div>
               </div>
             </div>
           </div>
@@ -86,6 +101,7 @@ function LoginPage() {
 
               <div className="pt-3">
                 <Button type="submit" className="w-full justify-center">
+                  <LogIn className="mr-2 h-4 w-4" />
                   Enter manager console
                 </Button>
               </div>

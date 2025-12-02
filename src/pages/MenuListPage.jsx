@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Plus, Pencil, Eye, EyeOff } from "lucide-react";
 import { Button, Card, Table, Badge, Modal, useToast } from "../components/ui";
 import { menuItems as initialMenuItems } from "../data/menu.js";
 
@@ -52,16 +53,27 @@ function MenuListPage() {
         <div className="flex justify-end gap-2 text-xs">
           <Link
             to={`/menu/${row.id}`}
-            className="rounded-full border border-slate-200 px-3 py-1 text-xs font-medium text-slate-700 hover:border-brand-500 hover:text-brand-600"
+            className="inline-flex items-center gap-1 rounded-full border border-slate-200 px-3 py-1 text-xs font-medium text-slate-700 hover:border-brand-500 hover:text-brand-600 transition-colors"
           >
+            <Pencil className="h-3 w-3" />
             Edit
           </Link>
           <button
             type="button"
             onClick={() => setItemToDisable(row)}
-            className="rounded-full border border-slate-200 px-3 py-1 text-xs font-medium text-slate-500 hover:border-rose-400 hover:text-rose-500"
+            className="inline-flex items-center gap-1 rounded-full border border-slate-200 px-3 py-1 text-xs font-medium text-slate-500 hover:border-rose-400 hover:text-rose-500 transition-colors"
           >
-            {row.status === "available" ? "Hide" : "Show"}
+            {row.status === "available" ? (
+              <>
+                <EyeOff className="h-3 w-3" />
+                Hide
+              </>
+            ) : (
+              <>
+                <Eye className="h-3 w-3" />
+                Show
+              </>
+            )}
           </button>
         </div>
       ),
@@ -103,6 +115,7 @@ function MenuListPage() {
         </div>
         <div className="flex gap-2">
           <Button as={Link} to="/menu/add" size="sm">
+            <Plus className="mr-1.5 h-3.5 w-3.5" />
             Add menu item
           </Button>
         </div>
